@@ -38,4 +38,8 @@ def validate_df(df):
 def dataframe_to_csv_bytes(df):
     return df.to_csv(index=False).encode('utf-8')
 
-def get_table_download_l
+def get_table_download_link(df, name="data.csv"):
+    csv = dataframe_to_csv_bytes(df)
+    b64 = base64.b64encode(csv).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="{name}">⬇️ Unduh CSV</a>'
+    return href
